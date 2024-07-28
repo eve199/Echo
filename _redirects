@@ -1,0 +1,11 @@
+# Rediriger l'accès principal vers la page de vérification
+/ /verification 301
+
+# Redirection personnalisée
+/verification /verification/index.html 200
+
+# Autres redirections possibles
+/ecobankcg/verification /verification 301
+
+# Rediriger toutes les erreurs 404 vers l'index
+/* /index.html 404

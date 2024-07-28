@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Authentification</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="ecobank-logo.ico" type="image/x-icon">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(0, 0, 255, 0.5), rgba(0, 128, 0, 0.5)), url('background.jpg');
+            background-size: cover;
+            animation: backgroundAnimation 15s ease infinite;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header img {
+            width: 75px;
+            margin-top: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid blue;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 70%;
+            width: 70%;
+            max-width: 400px;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .title {
+            color: blue;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: blue;
+            font-size: 10px;
+            margin-top: 10px;
+        }
+
+        .text-muted {
+            color: black;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-control {
+            background-color: rgba(173, 216, 230, 0.3); /* Bleu ciel transparent */
+            border: 1px solid #ADD8E6; /* Bordure bleu ciel */
+            color: black;
+        }
+
+        .footer {
+            margin-top: 10px;
+            text-align: right;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 10px;
+        }
+
+        .social-icons a {
+            margin: 0 5px;
+            text-decoration: none;
+            color: blue;
+            font-size: 10px;
+        }
+
+        .social-icons a:hover {
+            color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Logo de l'entreprise -->
+<div class="header">
+    <img src="ecobank-logo.png" alt="Ecobank Logo">
+</div>
+
+<div class="container" id="main-container">
+    <!-- Titre principal -->
+    <h1 class="title">Ecobank</h1>
+    <!-- Texte de description -->
+    <p class="text-muted">Le service permet de vérifier l'authenticité des documents</p>
+    <!-- Sous-titre -->
+    <h2 class="subtitle">Accès au service de vérification</h2>
+    <!-- Formulaire de saisie -->
+    <form id="verificationForm">
+        <div class="form-group">
+            <label for="documentNumber">Saisissez le numéro du document* (obligatoire)</label>
+            <input type="text" class="form-control" id="documentNumber" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+    </form>
+</div>
+
+<!-- Pied de page avec les contacts -->
+<div class="footer">
+    <p>Contacts de l'entreprise:</p>
+    <p>Email: contact@ecobankcg.com</p>
+    <div class="social-icons">
+        <a href="https://www.facebook.com/Ecobank" target="_blank">Facebook</a> |
+        <a href="https://twitter.com/Ecobank" target="_blank">Twitter</a> |
+        <a href="https://www.linkedin.com/company/ecobank" target="_blank">LinkedIn</a>
+    </div>
+</div>
+
+<!-- JavaScript pour les animations et la vérification des codes -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation d'apparition du conteneur principal
+        const container = document.getElementById('main-container');
+        container.style.opacity = 0;
+        container.style.transition = 'opacity 2s';
+        setTimeout(() => {
+            container.style.opacity = 1;
+        }, 100);
+
+        // Animation du bouton "Valider" lors du survol
+        const button = document.querySelector('.btn-primary');
+        button.addEventListener('mouseover', function() {
+            button.style.backgroundColor = 'darkblue';
+            button.style.transition = 'background-color 0.3s';
+        });
+        button.addEventListener('mouseout', function() {
+            button.style.backgroundColor = '';
+        });
+
+        // Gestion de la vérification des codes
+        const form = document.getElementById('verificationForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const documentNumber = document.getElementById('documentNumber').value;
+            const validCodes = {
+                "23/BZV/ECOBANK/24": {
+                    accountNumber: "37000008188",
+                    name: "MBOUALA KAMESSA Andréa",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "0A0652452",
+                    studyCity: "Metz, au Lycée Notre Dame de Peltre",
+                    departureDate: "20 Août 2024"
+                },
+                "78/BZV/ECOBANK/24": {
+                    accountNumber: "37000009570",
+                    name: "BAKALA MOUSSOUNDA BELVINA PRINCINELLE",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "OA0668372",
+                    studyCity: "IFIDE, Strasbourg",
+                    departureDate: "31 Août 2024"
+                },
+                "31/BZV/ECOBANK/24": {
+                    accountNumber: "37000001245",
+                    name: "TSOUMOU MBOU Merveille",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "OA0668372",
+                    studyCity: "Lycée Louis Couffignal, Strasbourg",
+                    departureDate: "31 Août 2024"
+                },
+                "50/BZV/ECOBANK/24": {
+                    accountNumber: "37000003270",
+                    name: "    ",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "OA0668372",
+                    studyCity: "IFIDE, Strasbourg",
+                    departureDate: "31 Août 2024"
+                },
+ 
+                // Ajoutez d'autres codes et informations ici
+            };
+           
+            if (validCodes[documentNumber]) {
+                localStorage.setItem('verificationResult', JSON.stringify(validCodes[documentNumber]));
+                window.location.href = "success.html";
+            } else {
+                window.location.href = "error.html";
+            }
+        });
+    });
+</script>
+
+<!-- Bootstrap and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
