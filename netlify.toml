@@ -1,5 +1,5 @@
 [build]
-  publish = "public"  # Remplacez par votre répertoire de publication
+  publish = "main"  # Remplacez par votre répertoire de publication
 
 [[redirects]]
   from = "/index.html"
