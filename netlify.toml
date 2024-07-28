@@ -1,7 +1,13 @@
 [[redirects]]
-  from = "/index.html"
+  from = "/"
   to = "/verification"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/verification"
+  to = "/index.html"
+  status = 200
   force = true
 
 [[redirects]]
@@ -17,14 +23,8 @@
   force = true
 
 [[redirects]]
-  from = "/"
-  to = "/verification"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://ecobankcg/verification.com"
-  to = "https://ecobankcg.com/verification"
+  from = "/verification.com"
+  to = "/index.html"
   status = 301
   force = true
 
