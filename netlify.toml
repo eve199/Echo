@@ -1,0 +1,30 @@
+[[redirects]]
+  from = "/index.html"
+  to = "/verification"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/success.html"
+  to = "/success"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/error.html"
+  to = "/error"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/"
+  to = "/verification"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://ecobankcg/verification.com"
+  to = "https://ecobankcg.com/verification"
+  status = 301
+  force = true
+
