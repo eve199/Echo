@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vérification réussie</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Succès - Vérification Ecobank</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="ecobank-logo.ico" type="image/x-icon">
     <!-- Custom CSS -->
     <style>
         body {
@@ -40,62 +38,91 @@
             width: 100%;
             max-width: 600px;
             margin: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        .title {
+            color: blue;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: blue;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        .text-muted {
+            color: black;
+            font-size: 16px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
         .success-icon {
-            font-size: 80px;
-            color: green;
+            width: 100px;
+            height: 100px;
             margin-bottom: 20px;
-        }
-
-        .info {
-            font-size: 20px;
-            color: blue;
-            font-weight: bold;
-            margin: 10px 0;
-            animation: fadeIn 2s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            background: url('success-icon.png') no-repeat center center;
+            background-size: contain;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <div class="success-icon">&#10004;</div>
+        <h1 class="title">Succès !</h1>
+        <p>Le document entré est une Attestation de Virement Irrévocable valide</p>
+        <p>Numéro de compte: <span id="accountNumber"></span></p>
+        <p>Nom: <span id="name"></span></p>
+        <p>Montant bloqué: <span id="amount"></span></p>
+        <p>Numéro de passeport: <span id="passportNumber"></span></p>
+        <p>Ville d'étude en France: <span id="studyCity"></span></p>
+        <p>Date de départ: <span id="departureDate"></span></p>
+    </div>
 
-<div class="container">
-    <!-- Icone de succès -->
-    <div class="success-icon">&#10004;</div>
-     <!-- Titre principal -->
-    <h1 class="title">Document vérifié avec succès</h1>
-    <!-- Informations dynamiques -->
-    <p class="info" id="accountNumber"></p>
-    <p class="info" id="name"></p>
-    <p class="info" id="amount"></p>
-    <p class="info" id="passportNumber"></p>
-    <p class="info" id="studyCity"></p>
-    <p class="info" id="departureDate"></p>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
 
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const result = JSON.parse(localStorage.getItem('verificationResult'));
+            const data = {
+                "23/BZV/ECOBANK/24": {
+                    accountNumber: "37000008188",
+                    name: "MBOUALA KAMESSA Andréa",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "0A0652452",
+                    studyCity: "Metz, au Lycée Notre Dame de Peltre",
+                    departureDate: "20 Août 2024"
+                },
+                "78/BZV/ECOBANK/24": {
+                    accountNumber: "37000008189",
+                    name: "BAKALA MOUSSOUNDA BELVINA PRINCINELLE",
+                    amount: "5.000.000 FCFA",
+                    passportNumber: "OA0668372",
+                    studyCity: "Strasbourg",
+                    departureDate: "31 Août 2024"
+                }
+            };
 
-        if (result) {
-            document.getElementById('accountNumber').innerText = "Numéro de compte bancaire: " + result.accountNumber;
-            document.getElementById('name').innerText = "Nom: " + result.name;
-            document.getElementById('amount').innerText = "Montant bloqué: " + result.amount;
-            document.getElementById('passportNumber').innerText = "Numéro du passeport: " + result.passportNumber;
-            document.getElementById('studyCity').innerText = "Ville d'étude: " + result.studyCity;
-            document.getElementById('departureDate').innerText = "Date de départ: " + result.departureDate;
-        } else {
-            window.location.href = "error";
-        }
-    });
-</script>
-
+            if (data[code]) {
+                document.getElementById('accountNumber').textContent = data[code].accountNumber;
+                document.getElementById('name').textContent = data[code].name;
+                document.getElementById('amount').textContent = data[code].amount;
+                document.getElementById('passportNumber').textContent = data[code].passportNumber;
+                document.getElementById('studyCity').textContent = data[code].studyCity;
+                document.getElementById('departureDate').textContent = data[code].departureDate;
+            } else {
+                window.location.href = 'error.html';
+            }
+        });
+    </script>
 </body>
 </html>
